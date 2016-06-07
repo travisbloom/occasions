@@ -1,28 +1,31 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 
-import {FormField, Input, FormSubmit, Row, Col, Button} from '../../components'
+import { AddressForm, Row, Col, FormSubmit, Button } from '../../components'
 
-import validate from './validate';
+import validate from './validate'
 
 class OnboardingPage2 extends React.Component {
     render() {
-        const {handleSubmit, previousPage} = this.props;
+        const { handleSubmit, previousPage } = this.props
         return (
-            <form onSubmit={handleSubmit}>
-                <FormField name='otherField' label='otherField' component={Input} />
-                <FormField name='anotherField' label='anotherField' component={Input} />
-                <Row>
-                    <Col xs={6}><Button block onClick={previousPage}>Back</Button></Col>
-                    <Col xs={6}><FormSubmit block {...this.props} /></Col>
-                </Row>
-            </form>
+            <div>
+                <h3>Awesome! What's your shipping address?</h3>
+                <h4>This will be used as your default return address.</h4>
+                <form onSubmit={handleSubmit}>
+                    <AddressForm parentName="address" />
+                    <Row>
+                        <Col xs={6}><Button block onClick={previousPage}>Back</Button></Col>
+                        <Col xs={6}><FormSubmit block {...this.props} /></Col>
+                    </Row>
+                </form>
+            </div>
         )
     }
 }
 
 export default reduxForm({
     form: 'onboarding',
-    destroyOnMount: false,
-    validate
-})(OnboardingPage2);
+    destroyOnUnmount: false,
+    validate,
+})(OnboardingPage2)

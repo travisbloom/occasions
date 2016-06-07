@@ -1,26 +1,31 @@
 import { Field } from 'redux-form'
 import React from 'react'
-import classNames from 'classnames'
 
-const FormField = ({component, label, defaultValue, name, ...passedProps}) => (
+const componentRenderer = ({ name, label, renderedComponent, helpText, ...props }) => (
+    <div className="form-group">
+        {label && <label htmlFor={name}>{label}</label>}
+        {renderedComponent({ tabIndex: '1', ...props, name })}
+        {helpText && <div className="help-block">{helpText}</div>}
+        {props.touched && props.error && <div style={{ color: 'red' }}>{props.error}</div>}
+    </div>
+)
+
+const FormField = ({ name, component, ...props }) => (
     <Field
+        {...props}
         name={name}
-        defaultValue={defaultValue}
-        component={(props) =>
-            <div className='form-group'>
-                {label && <label for={name}>{label}</label>}
-                {component({...props, ...passedProps, name})}
-                {props.touched && props.error && <div style={{color: 'red'}}>{props.error}</div>}
-            </div>
-        }
+        tabIndex="1"
+        renderedComponent={component}
+        component={componentRenderer}
     />
-);
+)
 
 FormField.propTypes = {
     label: React.PropTypes.node,
     component: React.PropTypes.func.isRequired,
     defaultValue: React.PropTypes.any,
-    name: React.PropTypes.string.isRequired
+    helpText: React.PropTypes.node,
+    name: React.PropTypes.string.isRequired,
 }
 
 export default FormField

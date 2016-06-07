@@ -11,22 +11,24 @@ import 'velocity-animate/velocity.ui'
 
 const rootEl = document.getElementById('root')
 ReactDOM.render(
-  <AppContainer>
-    <Routes />
-  </AppContainer>,
+    <AppContainer>
+        <Routes />
+    </AppContainer>,
   rootEl
 )
 
 if (module.hot) {
+    /* eslint-disable global-require */
     module.hot.accept('./Routes', () => {
     // If you use Webpack 2 in ES modules mode, you can
     // use <App /> here rather than require() a <NextApp />.
         const NextApp = require('./Routes').default
         ReactDOM.render(
-      <AppContainer>
-        <NextApp />
-      </AppContainer>,
+            <AppContainer>
+                <NextApp />
+            </AppContainer>,
       rootEl
     )
     })
+    /* eslint-enable global-require */
 }

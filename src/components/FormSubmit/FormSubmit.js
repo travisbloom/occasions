@@ -1,13 +1,16 @@
 import React from 'react'
-import classNames from 'classnames'
 
-import {Button} from '../'
+import { Button } from '../'
 
-//form submit button that consumes redux-form props
-const FormSubmit = ({pristine, submitting, disabled, children, onClick, handleSubmit, bsStyle, ...props}) => {
-    const isDisabled = pristine || submitting || disabled;
+// form submit button that consumes redux-form props
+const FormSubmit = ({
+    pristine, submitting, disabled, children,
+    onClick, handleSubmit, bsStyle, ...props,
+}) => {
+    const isDisabled = pristine || submitting || disabled
     return (
         <Button
+            tabIndex="1"
             {...props}
             disabled={isDisabled}
             onClick={onClick || handleSubmit}
@@ -16,12 +19,12 @@ const FormSubmit = ({pristine, submitting, disabled, children, onClick, handleSu
             {submitting ? 'Submitting' : (children || 'Submit')}
         </Button>
     )
-};
+}
 
 FormSubmit.propTypes = {
     pristine: React.PropTypes.bool.isRequired,
     handleSubmit: React.PropTypes.func.isRequired,
-    submitting: React.PropTypes.bool.isRequired
+    submitting: React.PropTypes.bool.isRequired,
 }
 
 export default FormSubmit

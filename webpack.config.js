@@ -25,6 +25,7 @@ module.exports = {
                 include: path.join(__dirname, 'src')
             },
             { test: /\.(woff2?|svg)$/, loader: 'url?limit=10000' },
+            { test: /\.scss$/,  loaders: ["style", "css", "sass"] },
             { test: /\.(ttf|eot)$/, loader: 'file' },
         ]
     }

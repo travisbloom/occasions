@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 
 import App from './pages/App/App'
 import LoginForm from './pages/LoginForm/LoginForm'
@@ -24,7 +24,7 @@ export default () => (
         <Router history={history}>
             <Route path="/" component={App}>
                 <Route path="login" component={LoginForm} />
-            <Route path="start" component={OnboardingForm} />
+                <Route path="start" component={OnboardingForm} />
             </Route>
         </Router>
     </Provider>
